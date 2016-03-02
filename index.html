@@ -18,8 +18,15 @@
     -ms-transition: background-color 1000ms linear;
     transition: background-color 1000ms linear;
   }
+  canvas{
+    position: absolute;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+  }
   #container{
-    position:absolute;
+    position: absolute;
     top:0px;
     bottom:0px;
     left:0px;
@@ -29,17 +36,18 @@
     position: absolute;
     width:350px;
     height:350px;
-    left:785px;
-    top:395px;
+    left: 870px;
+    top: 432px;
     z-index:500;
   }
   #status_label{
-    font-size:42px;
+    font-size: 42px;
     text-align: center;
     font-family: 'Avenir_next_regular';
-    bottom: 30px;
+    bottom: 0px;
     left: 0px;
-    right:0px;
+    display: hidden;
+    right: 0px;
     position: absolute;
   }
   @font-face {
@@ -63,8 +71,9 @@
   </style>
 </head>
 <body>
+
   <div id="container" class="centered">
-    <canvas id="drawing_canvas"></canvas>
+  <canvas id="drawing_canvas"></canvas>
     <div id="status_label">lade...</div>
     <img id="center_logo" src="img/hessen.png" onmousedown="if (event.preventDefault) event.preventDefault()" />
   </div>

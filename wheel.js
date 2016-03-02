@@ -51,7 +51,7 @@ window.onload = function() {
         lastTimeMilliseconds = timeMilliseconds;
         update();
     });
-    statusLabel.innerHTML = 'Wer will noch mal, wer hat noch nicht...';
+    statusLabel.innerHTML = '';
 };
 function getColorForIndex(i){
           //faf2d0 beige
@@ -84,8 +84,8 @@ function getColorForIndex(i){
         }
       }
 function initDrawingCanvas() {
-    drawingCanvas.width = viewWidth;
-    drawingCanvas.height = viewHeight;
+    drawingCanvas.width = 1920;
+    drawingCanvas.height = 1200;
     ctx = drawingCanvas.getContext('2d');
 
     drawingCanvas.addEventListener('mousemove', updateMouseBodyPosition);
@@ -102,6 +102,7 @@ function updateMouseBodyPosition(e) {
 }
 
 function checkStartDrag(e) {
+  console.log(e);
     if (world.hitTest(mouseBody.position, [wheel.body])[0]) {
 
         mouseConstraint = new p2.RevoluteConstraint(mouseBody, wheel.body, {
@@ -116,6 +117,7 @@ function checkStartDrag(e) {
     if (wheelSpinning === true) {
         wheelSpinning = false;
         wheelStopped = true;
+
         //statusLabel.innerHTML = "des dreht sisch doch noch...";
     }else{
         wheel.body.angularVelocity = Math.max(wheel.body.angularVelocity, 1.5);
@@ -179,13 +181,13 @@ function initPhysics() {
     });
     world.addContactMaterial(contactMaterial);
 
-    var wheelRadius = 10,
-        wheelX = physicsCenterX,
-        wheelY = wheelRadius+0.75 ,
+    var wheelRadius = 10.8,
+        wheelX = physicsCenterX+2.05,
+        wheelY = wheelRadius -1,
         arrowX = wheelX,
-        arrowY = wheelY + wheelRadius +1;// + 0.625;
+        arrowY = wheelY + wheelRadius +1.0;// + 0.625;
 
-    wheel = new Wheel(wheelX, wheelY, wheelRadius, 21, 0.15, 10);
+    wheel = new Wheel(wheelX, wheelY, wheelRadius, 21, 0.15, 10.8);
     //wheel.body.angle = (Math.PI / 32.5);
     wheel.body.angularVelocity = 1;
     arrow = new Arrow(arrowX, arrowY, 0.8, 1.8);
@@ -200,12 +202,14 @@ function update() {
     // console.log('wheelStopped' + wheelStopped);
     // console.log('arrow.hasStopped()'+arrow.hasStopped());
     // console.log('speed'+Math.abs(wheel.body.angularVelocity));
+    // var color = ctx.getImageData((1920/2)+100,200,1,1).data;
+    // $('body').css('background-color', 'rgb('+color[0]+','+color[1]+','+color[2]+')');
     if (wheelSpinning === true && wheelStopped === false && arrow.hasStopped() &&
         Math.abs(wheel.body.angularVelocity) < 0.2) {
         wheelStopped = true;
         wheelSpinning = false;
         wheel.body.angularVelocity = 0;
-        var color = ctx.getImageData(1920/2,150,1,1).data;
+        var color = ctx.getImageData((1920/2)+100,200,1,1).data;
         $('body').css('background-color', 'rgb('+color[0]+','+color[1]+','+color[2]+')');
         setTimeout(function(){
             $('body').css('background-color', '#ffffff');

@@ -80,7 +80,7 @@ function getColorForIndex(i){
               return '#D61923';
               break;
             default:
-              return '#faf2d0';
+              return '#edba36';
         }
       }
 function initDrawingCanvas() {

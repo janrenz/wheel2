@@ -39,7 +39,7 @@ var statusLabel = document.getElementById('status_label');
 window.onload = function() {
     initDrawingCanvas();
     initPhysics();
-    var fixedTimeStep = 1 / 120, maxSubSteps = 20, lastTimeMilliseconds;
+    var fixedTimeStep = 1 / 120, maxSubSteps = 24, lastTimeMilliseconds;
     requestAnimationFrame(function animloop(timeMilliseconds){
         requestAnimationFrame(animloop);
         var timeSinceLastCall = 0;
@@ -50,39 +50,52 @@ window.onload = function() {
         world.step(fixedTimeStep, timeSinceLastCall, maxSubSteps);
         lastTimeMilliseconds = timeMilliseconds;
         update();
+        if (wheelSpinning === true ){
+          $('#center_logo').css('transition','');
+          $('#center_logo').css('transform',"rotate("+(normalizeAngle(wheel.body.angle))*-1+"rad)");
+        }
     });
     statusLabel.innerHTML = '';
 };
+function normalizeAngle(angle){
+                angle = angle % (2*Math.PI);
+                if(angle < 0){
+                    angle += (2*Math.PI);
+                }
+                return angle;
+            }
 function getColorForIndex(i){
           //faf2d0 beige
           //D61923 rot
           //0053a0 blau
           switch (i) {
             case 0:
-            case 7:
-            case 14:
                 return '#ffffff';
                 break;
             case 1:
-            case 4:
-            case 8:
-            case 11:
-            case 15:
-            case 18:
-              return '#004A93';
-              break;
-            case 2:
+            case 3:
             case 5:
+            case 7:
             case 9:
-            case 12:
-            case 16:
+            case 11:
+            case 13:
+            case 15:
+            case 17:
             case 19:
-              return '#D61923';
+            case 21:
+            case 23:
+            case 25:
+            case 27:
+            case 29:
+            case 31:
+            case 33:
+              return '#001f4f';
               break;
             default:
-              return '#edba36';
+              return '#feb300';
         }
       }
+      //#feb300
 function initDrawingCanvas() {
     drawingCanvas.width = 1920;
     drawingCanvas.height = 1200;
@@ -102,7 +115,7 @@ function updateMouseBodyPosition(e) {
 }
 
 function checkStartDrag(e) {
-  console.log(e);
+    //console.log(e);
     if (world.hitTest(mouseBody.position, [wheel.body])[0]) {
 
         mouseConstraint = new p2.RevoluteConstraint(mouseBody, wheel.body, {
@@ -125,8 +138,9 @@ function checkStartDrag(e) {
       }else if (wheel.body.angularVelocity > 0 && wheel.body.angularVelocity<1.5){
         //wheel.body.angularVelocity = 1.5;
       }
-
+      $('#center_logo').css('transition','');
     }
+
 }
 
 function checkEndDrag(e) {
@@ -192,7 +206,7 @@ function initPhysics() {
         arrowX = wheelX,
         arrowY = wheelY + wheelRadius +1.0;// + 0.625;
 
-    wheel = new Wheel(wheelX, wheelY, wheelRadius, 21, 0.15, 10.8);
+    wheel = new Wheel(wheelX, wheelY, wheelRadius, 33, 0.15, 10.8);
     //wheel.body.angle = (Math.PI / 32.5);
     wheel.body.angularVelocity = 1;
     arrow = new Arrow(arrowX, arrowY, 0.8, 1.8);
@@ -201,7 +215,7 @@ function initPhysics() {
 }
 
 function spawnPartices() {
-    for (var i = 0; i < 250; i++) {
+    for (var i = 0; i < 500; i++) {
         var p0 = new Point(viewCenterX+100, viewCenterY );
         var p1 = new Point(viewCenterX+100, 0);
         var p2 = new Point(Math.random() * viewWidth, Math.random() * viewCenterY);
@@ -217,13 +231,6 @@ function update() {
         particles.splice(particles.indexOf(p), 1);
     }
   });
-    //setColorForBg( wheel.currentSegment());
-    // console.log('wheelSpinning' + wheelSpinning);
-    // console.log('wheelStopped' + wheelStopped);
-    // console.log('arrow.hasStopped()'+arrow.hasStopped());
-    // console.log('speed'+Math.abs(wheel.body.angularVelocity));
-    // var color = ctx.getImageData((1920/2)+100,200,1,1).data;
-    // $('body').css('background-color', 'rgb('+color[0]+','+color[1]+','+color[2]+')');
     if (wheelSpinning === true && wheelStopped === false && arrow.hasStopped() &&
         Math.abs(wheel.body.angularVelocity) < 0.2) {
         wheelStopped = true;
@@ -234,6 +241,10 @@ function update() {
         if (color[0]==255 && color[1]==255 && color[2]==255){
           spawnPartices();
         }
+
+        $('#center_logo').css('transition','transform 750ms ease-in');
+        $('#center_logo').css('transform','rotate(0deg)');
+
         setTimeout(function(){
             $('body').css('background-color', '#ffffff');
         }, 5000);
@@ -450,11 +461,12 @@ Particle = function(p0, p1, p2, p3) {
     this.p3 = p3;
 
     this.time = 0;
-    this.duration = 3 + Math.random() * 2;
-    this.color =  'hsl(' + Math.floor(Math.random() * 360) + ',100%,50%)';
-
+    this.duration = 6 + Math.random() * 2;
+    //this.color =  'hsl(' + Math.floor(Math.random() * 360) + ',100%,50%)';
+    col =  Math.floor(Math.random() * 360)
+    this.color =  'rgb('+col+','+col+','+col+')';
     this.w = 10;
-    this.h = 7;
+    this.h = 30;
 
     this.complete = false;
 };

@@ -4,12 +4,14 @@
   <meta charset="utf-8"/>
   <script type="text/javascript" src="libs/p2.js"></script>
   <script type="text/javascript" src="libs/jquery-2.2.1.js"></script>
-  <title>Hessen-Wheel</title>
+  <title>Verivox-Wheel</title>
   <style>
   body{
     margin:0px;
     padding:0px;
     width:1920px;
+    height:1080px;
+    overflow: hidden;
     color: '#004A93';
     background-color: #ffffff;
     -webkit-transition: background-color 1000ms linear;
@@ -33,12 +35,15 @@
     right:0px;
   }
   #center_logo{
+    pointer-events: none;
     position: absolute;
-    width:350px;
-    height:350px;
-    left: 870px;
-    top: 432px;
+    width: 1086px;
+    height: 1086px;
+    left: 516px;
+    top: 76px;
     z-index:500;
+    background-image: url("img/verivox-wheel.png");
+    display: block-inline;
   }
   #status_label{
     font-size: 42px;
@@ -68,6 +73,8 @@
          url('fonts/Avenir_next_LT_bold.ttf') format('truetype'),
          url('fonts/Avenir_next_LT_bold.svg') format('svg');
 }
+
+
   </style>
 </head>
 <body>
@@ -75,7 +82,7 @@
   <div id="container" class="centered">
   <canvas id="drawing_canvas"></canvas>
     <div id="status_label">lade...</div>
-    <img id="center_logo" src="img/hessen.png" onmousedown="if (event.preventDefault) event.preventDefault()" />
+    <span id="center_logo" src="img/verivox-wheel.png" onmousedown="return true;" ></span>
   </div>
 
   <script type="text/javascript" src="wheel.js"></script>

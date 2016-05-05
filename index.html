@@ -1,90 +1,101 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
-  <meta charset="utf-8"/>
+  <meta charset="utf-8" />
   <script type="text/javascript" src="libs/p2.js"></script>
   <script type="text/javascript" src="libs/jquery-2.2.1.js"></script>
   <title>Verivox-Wheel</title>
   <style>
-  body{
-    margin:0px;
-    padding:0px;
-    width:1920px;
-    height:1080px;
-    overflow: hidden;
-    color: '#004A93';
-    background-color: #ffffff;
-    -webkit-transition: background-color 1000ms linear;
-    -moz-transition: background-color 1000ms linear;
-    -o-transition: background-color 1000ms linear;
-    -ms-transition: background-color 1000ms linear;
-    transition: background-color 1000ms linear;
-  }
-  canvas{
-    position: absolute;
-    top:0px;
-    bottom:0px;
-    left:0px;
-    right:0px;
-  }
-  #container{
-    position: absolute;
-    top:0px;
-    bottom:0px;
-    left:0px;
-    right:0px;
-  }
-  #center_logo{
-    pointer-events: none;
-    position: absolute;
-    width: 1086px;
-    height: 1086px;
-    left: 516px;
-    top: 76px;
-    z-index:500;
-    background-image: url("img/verivox-wheel.png");
-    display: block-inline;
-  }
-  #status_label{
-    font-size: 42px;
-    text-align: center;
-    font-family: 'Avenir_next_regular';
-    bottom: 0px;
-    left: 0px;
-    display: hidden;
-    right: 0px;
-    position: absolute;
-  }
-  @font-face {
-    font-family: 'Avenir_next_regular';
-    src: url('fonts/Avenir_next_regular.eot');
-    src: url('fonts/Avenir_next_regular.eot') format('embedded-opentype'),
-         url('fonts/Avenir_next_regular.woff') format('woff'),
-		     url('fonts/Avenir_next_regular.ttf') format('truetype'),
-         url('fonts/Avenir_next_regular.svg') format('svg');
-}
+    body {
+      margin: 0px;
+      padding: 0px;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      color: '#004A93';
+      background-color: #ffffff;
+      -webkit-transition: background-color 1000ms linear;
+      -moz-transition: background-color 1000ms linear;
+      -o-transition: background-color 1000ms linear;
+      -ms-transition: background-color 1000ms linear;
+      transition: background-color 1000ms linear;
+    }
 
+    canvas {
+      position: absolute;
+      top: 0px;
+      bottom: 0px;
+      left: 0px;
+      right: 0px;
+    }
 
-@font-face {
-    font-family: 'Avenir_next_LT_bold';
-    src: url('fonts/Avenir_next_LT_bold.eot');
-    src: url('fonts/Avenir_next_LT_bold.eot') format('embedded-opentype'),
-         url('fonts/Avenir_next_LT_bold.woff') format('woff'),
-         url('fonts/Avenir_next_LT_bold.ttf') format('truetype'),
-         url('fonts/Avenir_next_LT_bold.svg') format('svg');
-}
+    #container {
+      position: absolute;
+      top: 0px;
+      bottom: 0px;
+      left: 0px;
+      right: 0px;
+    }
 
+    #center_logo {
+      pointer-events: none;
+      position: absolute;
+      width: 1086px;
+      height: 1086px;
+      left: 516px;
+      top: 76px;
+      z-index: 500;
+      background-image: url("img/verivox-wheel.png");
+      display: block-inline;
+    }
+    #wheel_text {
+      pointer-events: none;
+      position: absolute;
+      width: 1086px;
+      height: 1086px;
+      left: 516px;
+      top: 76px;
+      z-index: 490;
+      background-image: url("img/text.png");
+      display: block-inline;
+    }
 
+    #status_label {
+      font-size: 42px;
+      text-align: center;
+      font-family: 'Avenir_next_regular';
+      bottom: 0px;
+      left: 0px;
+      display: hidden;
+      right: 0px;
+      position: absolute;
+    }
+
+    @font-face {
+      font-family: 'Avenir_next_regular';
+      src: url('fonts/Avenir_next_regular.eot');
+      src: url('fonts/Avenir_next_regular.eot') format('embedded-opentype'), url('fonts/Avenir_next_regular.woff') format('woff'), url('fonts/Avenir_next_regular.ttf') format('truetype'), url('fonts/Avenir_next_regular.svg') format('svg');
+    }
+
+    @font-face {
+      font-family: 'Avenir_next_LT_bold';
+      src: url('fonts/Avenir_next_LT_bold.eot');
+      src: url('fonts/Avenir_next_LT_bold.eot') format('embedded-opentype'), url('fonts/Avenir_next_LT_bold.woff') format('woff'), url('fonts/Avenir_next_LT_bold.ttf') format('truetype'), url('fonts/Avenir_next_LT_bold.svg') format('svg');
+    }
   </style>
 </head>
+
 <body>
 
   <div id="container" class="centered">
-  <canvas id="drawing_canvas"></canvas>
+    <canvas id="drawing_canvas"></canvas>
     <div id="status_label">lade...</div>
-    <span id="center_logo" src="img/verivox-wheel.png" onmousedown="return true;" ></span>
+    <span id="center_logo" src="" onmousedown="return true;"></span>
+    <span id="wheel_text" src="" onmousedown="return true;"></span>
   </div>
 
   <script type="text/javascript" src="wheel.js"></script>
 </body>
+
 </html>

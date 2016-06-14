@@ -94,7 +94,7 @@ function getColorForIndex(i) {
     case 29:
     case 31:
     case 33:
-      return '#00204f';
+      return '#828282';
       break;
     default:
       return '#fd8a02';

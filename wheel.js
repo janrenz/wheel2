@@ -213,7 +213,7 @@ function initPhysics() {
     arrowX = wheelX,
     arrowY = wheelY + wheelRadius + 1.0; // + 0.625;
 
-  wheel = new Wheel(wheelX, wheelY, wheelRadius, 33, 0.15, 10.8);
+  wheel = new Wheel(wheelX, wheelY, wheelRadius, 31, 0.15, 10.8);
   //wheel.body.angle = (Math.PI / 32.5);
   wheel.body.angularVelocity = 1;
   arrow = new Arrow(arrowX, arrowY, 0.8, 1.8);
